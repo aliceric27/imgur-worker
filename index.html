@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易 Imgur 上傳工具</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <!-- 上傳頁面 -->
+    <div id="uploadView" class="view-container active">
+        <div class="container" style="max-width: 1000px;">
+            <!-- 主題切換開關 -->
+            <div class="position-fixed top-0 end-0 p-3">
+              <button id="themeToggle" class="btn btn-sm">
+                <i class="fas fa-sun theme-icon-light"></i>
+                <i class="fas fa-moon theme-icon-dark"></i>
+              </button>
+            </div>
+
+            <div class="text-center my-4">
+                <h2 class="fw-bold">Imgur 圖片上傳工具</h2>
+                <p class="text-muted">快速上傳、分享您的圖片</p>
+            </div>
+
+            <div class="card mt-4 shadow">
+              <div class="card-body p-0">
+                <div class="paste-area p-5 text-center" id="pasteArea">
+                  <i class="fas fa-cloud-upload-alt fa-4x mb-3 text-primary"></i>
+                  <h4>將圖片拖曳至此處或直接貼上圖片</h4>
+                  <p class="text-muted mt-2">支援 JPG、PNG、GIF、APNG、TIFF 格式</p>
+                  <p class="text-muted"><kbd>Ctrl</kbd> + <kbd>V</kbd> 直接貼上剪貼簿圖片</p>
+                </div>
+                <div class="progress-container d-none" id="uploadProgress">
+                  <div class="progress" style="height: 6px; border-radius: 0;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                  </div>
+                  <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">上傳中...</span>
+                    </div>
+                    <p class="mt-2">正在上傳圖片，請稍候...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 預覽頁面 -->
+    <div id="previewView" class="view-container">
+        <div class="container" style="max-width: 1000px;">
+            <!-- 主題切換開關 -->
+            <div class="position-fixed top-0 end-0 p-3">
+              <button id="themeTogglePreview" class="btn btn-sm">
+                <i class="fas fa-sun theme-icon-light"></i>
+                <i class="fas fa-moon theme-icon-dark"></i>
+              </button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center my-4">
+                <h2 class="fw-bold">預覽圖片</h2>
+                <button class="btn btn-primary" id="backToUpload">
+                    <i class="fas fa-arrow-left me-2"></i>返回上傳
+                </button>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <div id="imageBlock">
+                        <div id="imageList">
+                            <!-- 動態生成圖片 -->
+                            <!-- 預覽頁面上的上傳按鈕 -->
+                            
+                        </div>
+                    </div>
+                    <div class="add-more-container">
+                                <div class="add-more-button" id="addMoreButton">
+                                    <i class="fas fa-plus fa-2x"></i>
+                                </div>
+                                <p class="text-center mt-2">點擊添加更多圖片或按 <kbd>Ctrl</kbd> + <kbd>V</kbd> 貼上</p>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 圖片模板 -->
+    <div class="image-block image-template">
+      <div class="card image-item position-relative">
+        <div class="image-controls">
+          <button class="btn btn-sm btn-danger" onclick="deleteBtnClick(this)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div class="card-body p-2">
+          <img class="image-thumbnail rounded" alt="" loading="lazy">
+          <div class="mt-2">
+            <div class="input-group">
+              <input type="text" class="form-control form-control-sm image-url" readonly>
+              <button class="btn btn-sm btn-outline-primary copy-btn" onclick="copyImageUrl(this.previousElementSibling)">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div class="file-info mt-1">
+              <small class="image-name"></small>
+              <br>
+              <small class="upload-time"></small>
+              <br>
+              <small class="file-size"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+.image-template {
+    display: none;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+  }
+  
+  html[data-bs-theme="dark"] body {
+    background-color: #121212;
+  }
+  
+  /* 視圖容器 */
+  .view-container {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+  
+  .view-container.active {
+    display: block;
+    opacity: 1;
+    animation-name: fadeIn;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 卡片動畫 */
+  .card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  }
+  
+  html[data-bs-theme="dark"] .card {
+    background-color: #2d3238;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+  
+  /* 圖片項目樣式 */
+  .image-item {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    flex: 0 0 auto;
+    width: 300px;
+    min-width: 280px;
+    max-width: 320px;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-name: fadeInUp;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .image-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+  }
+  
+  .image-controls {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+  }
+  
+  .image-item:hover .image-controls {
+    display: flex;
+  }
+  
+  .image-thumbnail {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .image-thumbnail:hover {
+    transform: scale(1.03);
+  }
+  
+  .file-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+  
+  /* 粘貼區域樣式 */
+  .paste-area {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.375rem;
+    border: 2px dashed #dee2e6;
+  }
+  
+  .paste-area:hover {
+    background-color: #e9ecef;
+    border-color: #007bff !important;
+  }
+  
+  .paste-area i {
+    color: #007bff;
+  }
+  
+  .paste-area:hover i {
+    color: #0056b3;
+  }
+
+  /* 拖放時的樣式 */
+  .paste-area.drag-over {
+    border-color: #007bff;
+    background-color: #e9ecef;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* 主題切換按鈕樣式 */
+  #themeToggle, #themeTogglePreview {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* 亮色主題下的樣式 */
+  html[data-bs-theme="light"] #themeToggle,
+  html[data-bs-theme="light"] #themeTogglePreview {
+    background-color: #ffffff;
+    color: #ffc107;
+    border: 1px solid #dee2e6;
+  }
+
+  html[data-bs-theme="light"] #themeToggle:hover,
+  html[data-bs-theme="light"] #themeTogglePreview:hover {
+    background-color: #ffc107;
+    color: #ffffff;
+    transform: rotate(30deg);
+  }
+  
+  /* 暗色主題下的樣式 */
+  html[data-bs-theme="dark"] #themeToggle,
+  html[data-bs-theme="dark"] #themeTogglePreview {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border: 1px solid #495057;
+  }
+
+  html[data-bs-theme="dark"] #themeToggle:hover,
+  html[data-bs-theme="dark"] #themeTogglePreview:hover {
+    background-color: #f8f9fa;
+    color: #343a40;
+    transform: rotate(-30deg);
+  }
+  
+  /* 主題圖標顯示/隱藏 */
+  html[data-bs-theme="light"] .theme-icon-dark {
+    display: none;
+  }
+  
+  html[data-bs-theme="dark"] .theme-icon-light {
+    display: none;
+  }
+  
+  /* 暗色主題下粘貼區域樣式 */
+  html[data-bs-theme="dark"] .paste-area {
+    background-color: #2d3238;
+    border-color: #495057;
+  }
+  
+  html[data-bs-theme="dark"] .paste-area:hover {
+    background-color: #343a40;
+  }
+  
+  /* 圖片網格容器樣式 */
+  #imageList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  /* 響應式網格布局 */
+  @media (min-width: 1400px) {
+    #imageList {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .image-item {
+      width: calc(50% - 8px);
+      min-width: 280px;
+    }
+
+    .add-more-container {
+      width: calc(50% - 8px);
+      min-width: 280px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .image-item {
+      width: 100%;
+      min-width: 250px;
+    }
+
+    .add-more-container {
+      width: 100%;
+      min-width: 250px;
+    }
+
+    #imageList {
+      gap: 12px;
+    }
+  }
+
+  /* 添加更多按鈕樣式 */
+  .add-more-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 auto;
+    min-height: 200px;
+  }
+  
+  .add-more-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .add-more-button:hover {
+    background-color: #e9ecef;
+    border-color: #007bff;
+    transform: scale(1.05);
+  }
+  
+  html[data-bs-theme="dark"] .add-more-button {
+    background-color: #2d3238;
+    border-color: #495057;
+    color: #6ea8fe;
+  }
+  
+  html[data-bs-theme="dark"] .add-more-button:hover {
+    background-color: #343a40;
+    border-color: #6ea8fe;
+  }
+  
+  /* 進度條樣式 */
+  .progress-container {
+    width: 100%;
+  }
+  
+  /* 複製按鈕樣式 */
+  .copy-btn {
+    transition: all 0.2s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
